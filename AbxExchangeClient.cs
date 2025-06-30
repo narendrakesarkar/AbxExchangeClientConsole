@@ -99,7 +99,7 @@ namespace AbxExchangeClient
         {
             try
             {
-                byte[] request = new byte[2] { 1, 0 }; // callType = 1, resendSeq = 0
+                byte[] request = new byte[2] { 1, 0 }; // callType = 1, resendSeq = 0 Request to stream all available packets from the server
                 await stream.WriteAsync(request);
             }
             catch (Exception ex)
@@ -179,7 +179,7 @@ namespace AbxExchangeClient
                 await client.ConnectAsync(Host, Port);
                 using var stream = client.GetStream();
 
-                byte[] request = new byte[2] { 2, (byte)sequence };
+                byte[] request = new byte[2] { 2, (byte)sequence }; // callType = 2 Request to resend a specific packet with a given sequence number
                 await stream.WriteAsync(request);
 
                 byte[] buffer = new byte[17];
